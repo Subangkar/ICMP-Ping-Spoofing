@@ -14,10 +14,15 @@
 
 int main(int argc, char const *argv[]) {
 
-	if (argc < 3) PRINT_ERROR("usage <source-ip> <destination-ip>")
+	if (argc < 3) PRINT_ERROR("usage <source-ip> <destination-ip> <payload [optional]>")
 
-	struct iphdr *ip;
-	ip = create_ping_ip_packet(argv[1], argv[2], "ping spoofing test");
+	const char* payload = (argc==3 ? "ping spoofing test" : argv[3]);
+
+	struct iphdr *ip = create_ping_ip_packet(argv[1], argv[2], payload);
+
+	printf("Sending... \n%-15s: <%s>\n%-15s: <%s>\n%-15s: ", "Source", argv[1], "Destination", argv[2], "Payload");
+	puts(payload);
+	
 	send_raw_ip_packet(ip);
 	return 0;
 }
