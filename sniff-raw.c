@@ -46,7 +46,7 @@ int main() {
 	struct packet_mreq mr;
 
 	// Create the raw socket
-	int sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+	int sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_IP));
 
 	// Turn on the promiscuous mode.
 	mr.mr_type = PACKET_MR_PROMISC;
