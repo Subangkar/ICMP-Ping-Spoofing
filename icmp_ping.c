@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
 
 	if (argc < 3) PRINT_ERROR("usage <source-ip> <destination-ip> <payload [optional]>")
 
-	const char* payload = (argc==3 ? "ping spoofing test" : argv[3]);
+	const char* payload = (argc<=3 ? "ping spoofing test" : argv[3]);
 
 	struct iphdr *ip = create_ping_ip_packet(argv[1], argv[2], payload);
 
