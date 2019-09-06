@@ -27,7 +27,7 @@ void send_raw_ip_packet(struct iphdr *ip) {
 
 	// Step 2: Set socket option.
 	if (setsockopt(sock, IPPROTO_IP, IP_HDRINCL, &enable, sizeof(enable)) < 0) PRINT_ERROR(
-				"Could Not set socket option");
+			"Could Not set socket option");
 
 	// Step 3: Provide needed information about destination.
 	dest_info.sin_family = AF_INET;
@@ -35,7 +35,7 @@ void send_raw_ip_packet(struct iphdr *ip) {
 
 	// Step 4: Send the packet out.
 	if (sendto(sock, ip, ntohs(ip->tot_len), 0, (struct sockaddr *) &dest_info, sizeof(dest_info)) < 0) PRINT_ERROR(
-				"Could not send ip packet");
+			"Could not send ip packet");
 	close(sock);
 }
 

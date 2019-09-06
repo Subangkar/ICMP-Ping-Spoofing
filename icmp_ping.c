@@ -27,21 +27,24 @@ int main(int argc, char const *argv[]) {
 	return 0;
 }
 
+/* sets the header fields of an ICMP packet for sending a ping request */
 void set_icmp_ping_header(struct icmphdr *icmp, uint16_t payload_length) {
-	icmp->type = ICMP_ECHO;
+	icmp->type = ICMP_ECHO; // ping request
 	icmp->checksum = in_checksum((uint16_t *) icmp, sizeof(struct icmphdr) + payload_length);
 }
 
+/* sets the header fields of an IP packet for sending an ICMP packet */
 void set_ip_icmp_header(struct iphdr *ip, const char *src, const char *dest, uint16_t payload_length) {
-	ip->version = 4;
+	ip->version = 4; // IPv4
 	ip->ihl = 5;
 	ip->ttl = 20;
 	ip->saddr = inet_addr(src);
 	ip->daddr = inet_addr(dest);
-	ip->protocol = IPPROTO_ICMP;
+	ip->protocol = IPPROTO_ICMP; // for ICMP packets
 	ip->tot_len = htons(sizeof(struct iphdr) + sizeof(struct icmphdr) + payload_length);// ip payload length
 }
 
+/* creates an IP packet for sending ping request for given source, destination and payload */
 struct iphdr *create_ping_ip_packet(const char *src, const char *dest, const char *payload) {
 	static uint8_t *buffer = NULL;
 
