@@ -81,11 +81,13 @@ class Ui_MainWindow(object):
         # import subprocess
         # subprocess.run(["icmpping", "1.2.3.4", "8.8.8.8"])
         cmd = "./spoof.sh \"" + victim_ip + "\" \"" + server_ip + "\"" + " \"" + payload + "\" ; exec bash"
+        # cmd = "./spoof.sh \"" + victim_ip + "\" \"" + server_ip + "\"" + " \"" + payload + "\""
         import os
         # os.system("bash ./spoof.sh \"" + victim_ip + "\" \"" + server_ip + "\"" + " \"" + payload + "\"")
         cmdline = 'gnome-terminal -e \'bash -c  "'+cmd+'"\''
         print(cmdline)
         os.system(cmdline)
+        # os.system(cmd)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Ping Spoofing", None))
