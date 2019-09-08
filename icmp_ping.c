@@ -18,12 +18,16 @@ int main(int argc, char const *argv[]) {
 
 	const char* payload = (argc<=3 ? "ping spoofing test" : argv[3]);
 
-	struct iphdr *ip = create_ping_ip_packet(argv[1], argv[2], payload);
-
 	printf("Sending... \n%-15s: <%s>\n%-15s: <%s>\n%-15s: ", "Source", argv[1], "Destination", argv[2], "Payload");
 	puts(payload);
-	
-	send_raw_ip_packet(ip);
+	for (int i = 0; i < 15; i++)
+	{
+		printf("Sent %d packets\n",i+1);
+		struct iphdr *ip = create_ping_ip_packet(argv[1], argv[2], payload);
+
+		send_raw_ip_packet(ip);
+	}
+
 	return 0;
 }
 
