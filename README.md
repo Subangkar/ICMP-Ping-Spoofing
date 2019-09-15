@@ -27,4 +27,4 @@ Example:
 - To run using mininet  
 A virtual topology with 4 hosts is created with mininet using `topology-mininet.py`.   
 run `python topology-mininet.py` to create the mininet.
-Must use python 2.
+Must use python 2 and use `frontend-mininet.py` instead of `frontend.py` as mininet runs as root.
